@@ -17,8 +17,6 @@ Q
 -user/gradle/wrapper/gradle-wrapper.properties,e/c/ecf0b3631cd8ca582587d3fa15364a492ac1818b
 @
 user/gradlew.bat,6/c/6c1e3f655fbf791bf5e25986947a5ce1a76d582c
-P
- onlinestore-fe/package-lock.json,1/c/1ce128ef16ad852e747e8749c3eba225e5b8a657
 A
 store/gradlew.bat,a/5/a56a0be346bc05bbe1c41ce07810cb801f8ab1b4
 ^
@@ -31,8 +29,6 @@ P
  onlinestore-fe/public/robots.txt,9/0/9030474efc33f1673c0dbee18899da24cb436c74
 J
 onlinestore-fe/src/App.css,4/d/4dcc4cce48a56537e03f5bd2179bdea29c16fc82
-L
-onlinestore-fe/src/index.css,f/8/f89358170439db30d4b7a8e593f4e13def50f1a0
 N
 onlinestore-fe/src/App.test.js,c/3/c3093e00d0df5cd8b0762aef1afb06d8046142e0
 K
