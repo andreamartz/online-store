@@ -42,19 +42,9 @@ class UserControllerTests {
         controller.setService(service);
     }
 
-
+    // *********** login ***********
     @Test
-    void itShouldCallIsAuthorizedWithAToken() {
-        TestRestTemplate rest = new TestRestTemplate();  // like fetch; has more features (debugging, error msgs) than RestTemplate
-        final UUID token = UUID.randomUUID();
-        String url = "http://localhost:" + port + "/isAuthorized?token=" + token;
-        doThrow(new ResponseStatusException(HttpStatus.ACCEPTED)).when(service).isAuthorized(token);
-        final ResponseEntity<Void> response = rest.getForEntity(url, Void.class);
-        assertEquals(HttpStatus.ACCEPTED, response.getStatusCode());
-    }
-
-    @Test
-    // test login endpoint
+        // test login endpoint
     void itShouldRespondWithResultUUIDWhenLoginServiceCalledWithUsernameAndPassword() {
 //    void itShouldRespondWithTokenWhenLoginValid() {
         final TestRestTemplate rest = new TestRestTemplate();
@@ -71,18 +61,48 @@ class UserControllerTests {
         assertEquals(token, response.getBody());
     }
 
+    // *********** register ***********
+
     // itShouldRespondWithUnAuthStatusWhenLoginInvalid
 
     // 19:00 in video 194546
+//    @Test
+//    void itShouldCallRegisterServiceWithUsernameAndPassword() {
+//        final TestRestTemplate rest = new TestRestTemplate();
+//        final String username = "some username";
+//        final String password = "some password";
+//        final String userType = "some type";
+//        final UUID token = UUID.randomUUID();
+//        String url = "http://localhost:" + port + "/register?token=" + token + "&username=" + username + "&password=" + password + "&userType=" + userType;
+//        doThrow(new ResponseStatusException(HttpStatus.ACCEPTED)).when(service).register(token, username, password, userType);
+//        final ResponseEntity<Void> response = rest.getForEntity(url, Void.class);
+//        assertEquals(HttpStatus.ACCEPTED, response.getStatusCode());
+//    }
+
+    // *********** isOwner ***********
     @Test
-    void itShouldCallRegisterServiceWithUsernameAndPassword() {
-        final TestRestTemplate rest = new TestRestTemplate();
-        final String username = "some username";
-        final String password = "some password";
-        final String userType = "some type";
-        String url = "http://localhost:" + port + "/register?username=" + username + "&password=" + password + "&userType=" + userType;
-        doThrow(new ResponseStatusException(HttpStatus.ACCEPTED)).when(service).register(username, password, userType);
+    void itShouldCallIsOwnerWithAToken() {
+        TestRestTemplate rest = new TestRestTemplate();
+        final UUID token = UUID.randomUUID();
+        final HttpStatus expected = HttpStatus.ACCEPTED;
+        String url = "http://localhost:" + port + "/isOwner?token=" + token;
+
+        doThrow(new ResponseStatusException(HttpStatus.ACCEPTED)).when(service).isOwner(token);
         final ResponseEntity<Void> response = rest.getForEntity(url, Void.class);
-        assertEquals(HttpStatus.ACCEPTED, response.getStatusCode());
+        assertEquals(expected, response.getStatusCode());
+    }
+
+    // *********** isAuthorized ***********
+
+    @Test
+    void itShouldCallIsAuthorizedWithAToken() {
+        TestRestTemplate rest = new TestRestTemplate();  // like fetch; has more features (debugging, error msgs) than RestTemplate
+        final UUID token = UUID.randomUUID();
+        final HttpStatus expected = HttpStatus.ACCEPTED;
+        String url = "http://localhost:" + port + "/isAuthorized?token=" + token;
+
+        doThrow(new ResponseStatusException(HttpStatus.ACCEPTED)).when(service).isAuthorized(token);
+        final ResponseEntity<Void> response = rest.getForEntity(url, Void.class);
+        assertEquals(expected, response.getStatusCode());
     }
 }

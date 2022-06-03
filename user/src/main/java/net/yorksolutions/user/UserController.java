@@ -35,9 +35,16 @@ public class UserController {
         return service.login(username, password);
     }
 
-    @GetMapping("/register")
-    public void register(@RequestParam String username, @RequestParam String password, @RequestParam String userType) {
-        service.register(username, password, userType);
+    // register owners
+//    @GetMapping("/register")
+//    public void register(@RequestParam(required = false) UUID token, @RequestParam String username, @RequestParam String password, @RequestParam String userType) {
+//        service.register(token, username, password, userType);
+//    }
+
+    @GetMapping("/isOwner")
+    @CrossOrigin
+    public boolean isOwner(@RequestParam UUID token) {
+      return service.isOwner(token);
     }
 
     @GetMapping("/isAuthorized")
