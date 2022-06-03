@@ -19,8 +19,6 @@ Q
 user/gradlew.bat,6/c/6c1e3f655fbf791bf5e25986947a5ce1a76d582c
 P
  onlinestore-fe/package-lock.json,1/c/1ce128ef16ad852e747e8749c3eba225e5b8a657
-I
-onlinestore-fe/.gitignore,1/4/14793f4288dabfae6a6c0d455877b5877e4024ea
 A
 store/gradlew.bat,a/5/a56a0be346bc05bbe1c41ce07810cb801f8ab1b4
 ^
@@ -33,16 +31,10 @@ P
  onlinestore-fe/public/robots.txt,9/0/9030474efc33f1673c0dbee18899da24cb436c74
 J
 onlinestore-fe/src/App.css,4/d/4dcc4cce48a56537e03f5bd2179bdea29c16fc82
-S
-#onlinestore-fe/public/manifest.json,b/1/b1a0fc3b0e3d9e583fd7a08ac8f5cb73d981fda1
 L
 onlinestore-fe/src/index.css,f/8/f89358170439db30d4b7a8e593f4e13def50f1a0
 N
 onlinestore-fe/src/App.test.js,c/3/c3093e00d0df5cd8b0762aef1afb06d8046142e0
-P
- onlinestore-fe/public/index.html,0/6/06d103c83c9c47f331f3d42584d4faf022c53c0c
-K
-onlinestore-fe/src/index.js,0/0/0073054258bae817de3c93c257f1d1d6300d45c3
 K
 onlinestore-fe/src/logo.svg,2/c/2c80520f7662af513da2e90ebcc1d61ce006a664
 H
