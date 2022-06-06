@@ -10,13 +10,12 @@ import java.util.Optional;
 public interface ProductRepository extends CrudRepository<Product, Long> {
     Optional<Product> findByName(String name);
 
-//    @Override
-//    Optional<Product> findById(Long aLong);
-
     Optional<Product> findById(Long id);
 
     // can use Iterable, Collection, or List
-    List<Product> findAll();
+//    Iterable<Product> findAll();  // not necessary as long as I use Iterable in my service; findAll comes from CrudRepository
+
+//    List<Product> findAll();
 
     void deleteById(Long id);
 

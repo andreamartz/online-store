@@ -1,5 +1,7 @@
 package net.yorksolutions.user;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,8 +18,13 @@ public class UserAccount {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     Long id;
 
+    @JsonProperty
     String userType;
+
+    @JsonProperty
     String username;
+
+    @JsonProperty
     String password;
 
     public UserAccount(String username, String password, String userType) {
@@ -44,5 +51,11 @@ public class UserAccount {
     public int hashCode() {
         return Objects.hash(id, userType, username, password);
     }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+// used in UserControllerTests.java
 
 }

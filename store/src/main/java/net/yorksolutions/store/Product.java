@@ -1,5 +1,7 @@
 package net.yorksolutions.store;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,10 +10,12 @@ import java.util.Objects;
 
 @Entity
 public class Product {
-    @Id
+    @Id  // primary key
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @JsonProperty
     Long id;
 
+    @JsonProperty
     String name;
 
     public Product(String name) {
@@ -33,5 +37,9 @@ public class Product {
     @Override
     public int hashCode() {
         return Objects.hash(id, name);
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

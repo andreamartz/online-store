@@ -21,9 +21,8 @@ public class StoreController {
     // not tested
     @GetMapping("/getAllProducts")
     @CrossOrigin
-    public List<Product> getAllProducts() {
-//        List<Product> products = service.getAllProducts();
-        return service.getAllProducts();
+    public Iterable<Product> getAllProducts(@RequestParam UUID token) {
+        return service.getAllProducts(token);
     }
 
     @GetMapping("/addProduct")

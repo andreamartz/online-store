@@ -29,14 +29,8 @@ P
  onlinestore-fe/public/robots.txt,9/0/9030474efc33f1673c0dbee18899da24cb436c74
 J
 onlinestore-fe/src/App.css,4/d/4dcc4cce48a56537e03f5bd2179bdea29c16fc82
-N
-onlinestore-fe/src/App.test.js,c/3/c3093e00d0df5cd8b0762aef1afb06d8046142e0
-K
-onlinestore-fe/src/logo.svg,2/c/2c80520f7662af513da2e90ebcc1d61ce006a664
 H
 onlinestore-fe/README.md,4/1/416efbe29581a982f766c8580e6455dce2c67d2d
-U
-%onlinestore-fe/src/reportWebVitals.js,b/b/bb1147bb93502270158be9dc725546070125d1e0
 v
 Fstore/src/test/java/net/yorksolutions/store/StoreApplicationTests.java,c/8/c883998134bdb1512961feabef09c35dbd19615a
 A
@@ -45,3 +39,19 @@ s
 Cuser/src/test/java/net/yorksolutions/user/UserApplicationTests.java,7/b/7b905f86f958f0cb9151da3cb11a88aa695bfb75
 P
  onlinestore-fe/src/setupTests.js,9/d/9dbddf18ef3747d628382096a479f76d7c790ec9
+q
+Astore/src/main/java/net/yorksolutions/store/StoreApplication.java,5/d/5d701e2d5ef69ef9206f04ec581a27c484e408ba
+I
+onlinestore-fe/.gitignore,1/4/14793f4288dabfae6a6c0d455877b5877e4024ea
+P
+ onlinestore-fe/package-lock.json,1/c/1ce128ef16ad852e747e8749c3eba225e5b8a657
+P
+ onlinestore-fe/public/index.html,0/6/06d103c83c9c47f331f3d42584d4faf022c53c0c
+L
+onlinestore-fe/src/index.css,f/8/f89358170439db30d4b7a8e593f4e13def50f1a0
+S
+#onlinestore-fe/public/manifest.json,b/1/b1a0fc3b0e3d9e583fd7a08ac8f5cb73d981fda1
+K
+onlinestore-fe/package.json,1/3/1392eb059c50e1923ff2d2ec27d1522744e0f899
+n
+>user/src/main/java/net/yorksolutions/user/UserApplication.java,4/0/40f4717475edc72c606666c22f29a0b07a199b7b

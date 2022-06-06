@@ -1,6 +1,13 @@
-import reducer, {initiateLogin, LOGIN_FAILURE, LOGIN_START, LOGIN_SUCCESS, LOGOUT, UPDATE_CREDENTIALS} from "./user";
+import reducer, {
+    initiateLogin,
+    LOGIN_FAILURE,
+    LOGIN_START,
+    LOGIN_SUCCESS,
+    LOGOUT,
+    UPDATE_CREDENTIALS
+} from "./user";
 
-it('should state w/ a null token', () => {
+it('should start w/ a null token', () => {
     const state = reducer()
     expect(state.token).toBeNull()
 })
@@ -32,24 +39,24 @@ it('should set loginPending false when LOGIN_FAILURE', () => {
     expect(state.loginPending).toBe(false)
 })
 
-it('should start with blank credentials', () => {
+it('should start with blank loginCredentials', () => {
     const state = reducer()
-    expect(state.credentials).toStrictEqual({username: '', password: ''})
+    expect(state.loginCredentials).toStrictEqual({username: '', password: ''})
 })
 
-it('should update credentials when UPDATE_CREDENTIALS', () => {
+it('should update loginCredentials when UPDATE_CREDENTIALS', () => {
     const initialState = reducer()
     const payload = {username: 'some username', password: 'some password'}
     const state = reducer(initialState, {type: UPDATE_CREDENTIALS, payload})
-    expect(state.credentials).toStrictEqual(payload)
+    expect(state.loginCredentials).toStrictEqual(payload)
 })
 
-it('should set token to null and credentials to blank when LOGOUT', () => {
+it('should set token to null and loginCredentials to blank when LOGOUT', () => {
     const initialState = reducer()
     initialState.token = 'some token'
-    initialState.credentials = {username: 'some username', password: 'some password'}
+    initialState.loginCredentials = {username: 'some username', password: 'some password'}
     const state = reducer(initialState, {type: LOGOUT})
-    expect(state.credentials).toStrictEqual({username: '', password: ''})
+    expect(state.loginCredentials).toStrictEqual({username: '', password: ''})
     expect(state.token).toBeNull()
 })
 
@@ -65,7 +72,7 @@ it('should dispatch LOGIN_START then LOGIN_FAILURE when initiateLogin w/ bad cre
     }
 
     const dispatch = jest.fn()
-    const state = {user: {credentials: {username, password}}}
+    const state = {user: {loginCredentials: {username, password}}}
     const getState = () => state
     const sideEffect = initiateLogin(mockFetch)
     await sideEffect(dispatch, getState)
@@ -90,7 +97,7 @@ it('should dispatch LOGIN_START then LOGIN_SUCCESS when initiateLogin w/ good cr
     }
 
     const dispatch = jest.fn()
-    const state = {user: {credentials: {username, password}}}
+    const state = {user: {loginCredentials: {username, password}}}
     const getState = () => state
     await initiateLogin(mockFetch)(dispatch, getState)
     expect(_url).toBe(url)

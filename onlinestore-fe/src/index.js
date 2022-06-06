@@ -34,7 +34,10 @@ function handleAsync(storeAPI) {
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(
+    // if want just one reducer, just change this first arg
     combineReducers({user, product}),
+    //
+    //
     composeEnhancers(applyMiddleware(handleAsync))
 )
 

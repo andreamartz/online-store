@@ -14,11 +14,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.AdditionalMatchers.not;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
@@ -105,4 +105,25 @@ class UserControllerTests {
         final ResponseEntity<Void> response = rest.getForEntity(url, Void.class);
         assertEquals(expected, response.getStatusCode());
     }
+
+
+//    // ************ Alex's test of getAllUsers 4:44 6/6 *************
+//    @Test
+//    void itShouldCallGetAllUsersWithTheProperTokenAndReturnIterable() {
+//        UserAccount u1 = new UserAccount("user1", "pw1", "owner");
+//        UserAccount u2 = new UserAccount("user2", "pw2", "customer");
+//        u1.setId(1L);
+//        u2.setId(2L);
+//        UserAccount[] users = new UserAccount[]{u1, u2};
+//        TestRestTemplate rest = new TestRestTemplate();
+//        final UUID token = UUID.randomUUID();
+//        when(service.getAllUsers(token)).thenReturn(List.of(testUsers));
+//
+//        String url = "http://localhost:" + port + "/getAllUsers?token=" + token;
+//
+//        final ResponseEntity<UserAccount[]> response = rest.getForEntity(url, UserAccount[].class);
+//
+//        // NOTE: assertArrayEquals is a static function
+//        assertArrayEquals(users, response.getBody());
+//    }
 }

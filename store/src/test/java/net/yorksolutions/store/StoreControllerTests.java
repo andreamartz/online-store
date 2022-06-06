@@ -15,7 +15,6 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -41,16 +40,23 @@ public class StoreControllerTests {
     }
 
     @Test
-    void itShouldCallGetAllProducts() {
-        final TestRestTemplate rest = new TestRestTemplate();
-        final String url = "http://localhost:" + port + "/getAllProducts";
-        final List<Product> products = new ArrayList<>();
-        products.add(new Product());
-        final ResponseEntity<List<Product>> response = rest.getForEntity(url, List.class);
+    void itShouldCallGetAllProductsAndReturnIterable() {
+        Product p1 = new Product("name1");
+        Product p2 = new Product("name2");
+        p1.setId(1L);
+        p2.setId(2L);
+        Product[] products = new Product[] {p1, p2};
+        TestRestTemplate rest = new TestRestTemplate();
+        UUID token = UUID.randomUUID();
 
-        when(service.getAllProducts()).thenReturn(products);
+        // List is an interface that extends Collection;
+        // Collection is an interface that extends Iterable
+        when(service.getAllProducts(token)).thenReturn(List.of(products));
+        String url = "http://localhost:" + port + "/getAllProducts?token=" + token;
 
-        assertEquals(products, response.getBody());
+        final ResponseEntity<Product[]> response = rest.getForEntity(url, Product[].class);
+
+        assertArrayEquals(products, response.getBody());
     }
 
     @Test

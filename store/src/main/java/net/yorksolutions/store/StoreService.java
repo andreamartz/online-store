@@ -15,6 +15,7 @@ import java.util.UUID;
 @Service
 public class StoreService {
     private ProductRepository repository;
+
     private final RestTemplate rest;
 
     @Autowired
@@ -43,10 +44,10 @@ public class StoreService {
                 return;
 
             case UNAUTHORIZED:
-                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
+                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "You must be logged in to perform this action.");
 
             default:
-                throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+                throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "There was a server error; please try again later");
         }
     }
 
@@ -60,23 +61,33 @@ public class StoreService {
 //     public List<Product> getAllProducts() {
 //        List<Product> productList = new ArrayList<>();
 //        List<Product> products = repository.findAll();
-//        if (products.isEmpty()) {
-//            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No products found");
-//        }
+////        if (products.isEmpty()) {
+////            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No products found");
+////        }
 //        products.forEach(productList::add);
 //        return productList;
 //    }
+
 //     https://www.baeldung.com/java-iterable-to-collection#2-iterator-to-collection
-    public List<Product> getAllProducts() {
-//    List<Product> productList = new ArrayList<>();
-    List<Product> products = repository.findAll();
-//    if (products.isEmpty()) {
-//        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No products found");
+    public Iterable<Product> getAllProducts(UUID token) {
+//    Iterable<Product> productList = new ArrayList<Product>()
+        checkAuthorized(token);
+        Iterable<Product> products = repository.findAll();
+        return products;
+
+        // TODO: try putting a message on exception thrown
+        // throw new ResponseStatusException(HttpStatus.CONFLICT, "Not really");
+    }
+
+//    public List<Product> getAllProducts(UUID token) {
+////    Iterable<Product> productList = new ArrayList<Product>()
+//        checkAuthorized(token);
+//        List<Product> products = repository.findAll();
+//        return products;
+//
+//        // TODO: try putting a message on exception thrown
+//        // throw new ResponseStatusException(HttpStatus.CONFLICT, "Not really");
 //    }
-//    products.forEach(productList::add);
-//    return productList;
-    return products;
-}
 
     public void addProduct(UUID token, String name) {
         Product newProduct = new Product(name);
@@ -91,16 +102,17 @@ public class StoreService {
             repository.save(newProduct);
     }
 
-    public void updateProduct(UUID token, Long id, String newName) {
-        checkAuthorized(token);
-
-        // if product not in table, throw exception
-        if (!repository.existsById(id)) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
-        } else {
-//            repository.
-        }
-    }
+//    public void updateProduct(UUID token, Long id, String newName) {
+//        checkAuthorized(token);
+//
+//        // if product not in table, throw exception
+//        if (!repository.existsById(id)) {
+//            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cannot find that product");
+//        }
+//        // try save method and newProduct
+//      repository.
+//
+//    }
 
     public void deleteProduct(UUID token, Long id) {
         checkAuthorized(token);

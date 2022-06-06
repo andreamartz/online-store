@@ -75,11 +75,18 @@ public class UserService {
 //        repository.save(newUser);
     }
 
+//    public Long getUserId(UUID token) {
+//        if (!tokenMap.containsKey(token)) {
+//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No user found with that token");
+//        }
+//        return tokenMap.get(token);
+//    }
+
     public boolean isOwner(UUID token) {
         Optional<UserAccount> mightBeUser;
         // throw error if tokenMap does not contain token
         if (!tokenMap.containsKey(token)) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "You must login first.");
         }
 
         Long id = tokenMap.get(token);
@@ -87,10 +94,10 @@ public class UserService {
 //
         // throw error if mightBeUser is empty
         if (mightBeUser.isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No user matches that user id.");
         }
         UserAccount user = mightBeUser.get();
-//
+
 //        // return whether user is owner or not
         if (user.userType == "owner") {
             return true;
@@ -103,8 +110,25 @@ public class UserService {
         if (tokenMap.containsKey(token))
             return;
 
-        throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
+        throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "You must login first.");
     }
+
+    public Iterable<UserAccount> getAllUsers(UUID token) {
+        isAuthorized(token);
+        Iterable<UserAccount> users = repository.findAll();
+        return users;
+    }
+
+//    public List<Product> getAllProducts(UUID token) {
+////    Iterable<Product> productList = new ArrayList<Product>()
+//        checkAuthorized(token);
+//        List<Product> products = repository.findAll();
+//        return products;
+//
+//        // TODO: try putting a message on exception thrown
+//        // throw new ResponseStatusException(HttpStatus.CONFLICT, "Not really");
+//    }
+
 
     public void setRepository(UserAccountRepository repository) {
         this.repository = repository;

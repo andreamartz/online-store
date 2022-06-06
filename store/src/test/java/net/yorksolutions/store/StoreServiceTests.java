@@ -13,8 +13,7 @@ import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -73,23 +72,83 @@ public class StoreServiceTests {
 //    // test getAllProducts
 //    void itShouldThrowNotFoundWhenNoProductsExist() {
 //        // var
-//
+//        List<Product> products1 = new ArrayList<Product>();
+//        Iterable<Product> products2 = Arrays.asList();
+////        products2.
 //        // setup
 //        when(repository.findAll()).thenReturn(List<Product>)
 //        // assert & maybe call
 //        service.getAllProducts()
 //    }
 
+    // passes, but actual is empty
+//    @Test
+//    // test getAllProducts
+//    void itShouldReturnAllProducts() {
+//        // var (arrange)
+//        UUID token = UUID.randomUUID();
+//        ArrayList<Product> expected = new ArrayList<Product>();
+////        expected.add(new Product("fridge"));
+//
+//        // setup (arrange)
+//        doNothing().when(service).checkAuthorized(any());
+//        when(repository.findAll()).thenReturn(new ArrayList<Product>());
+//
+//        // call (act)
+//        final Iterable<Product> actual = service.getAllProducts(token);
+//
+//        // assert (assert) & maybe call
+//        assertEquals(expected, actual);
+//    }
+
+//     TODO: try something else here
+//     in this case the thing that is returned depends on the database,
+//         and Madison's will be different from mine
+//     for that reason, I shouldn't test the equality of the returned
     @Test
-    // test getAllProducts
-    void itShouldReturnAllProductsWhenThereIsAtLeastOneProduct() {
-        // var
+        // test getAllProducts
+    void itShouldCallFindAllAndReturnAnIterable() {
+        // var (arrange)
+        UUID token = UUID.randomUUID();
+        ArrayList<Product> expected = new ArrayList<Product>();
+        expected.add(new Product("car"));
+//        ArrayList<Product> testDb = new ArrayList<Product>();
+//        testDb.add(new Product("car"));
 
-        // setup
+        // setup (arrange)
+        doNothing().when(service).checkAuthorized(any());
+//        when(repository.findAll()).thenReturn(new ArrayList<Product>());
+        when(repository.findAll()).thenReturn(expected);
 
-        // assert & maybe call
+        // call (act)
+        final Iterable<Product> actual = service.getAllProducts(token);
+
+        // assert (assert) & maybe call
+        assertEquals(expected, actual);
     }
 
+    @Test
+        // test getAllProducts
+    void itShouldCallFindAllAndReturnAnIterable2() {
+        // var (arrange)
+        UUID token = UUID.randomUUID();
+        Product car = new Product("car");
+        Product[] expected = new Product[] {car};
+
+        // setup (arrange)
+        doNothing().when(service).checkAuthorized(any());
+            // below, I can't just return expected; I think that is bc expected is not an iterable??
+        when(repository.findAll()).thenReturn(List.of(expected));
+
+        // call (act)
+        final Iterable<Product> actual = service.getAllProducts(token);
+
+        // assert (assert) & maybe call
+        assertEquals(List.of(expected), actual);
+    }
+
+
+    //********** addProduct **********
     @Test
     // test addProduct
     void itShouldThrowConflictWhenProductToAddExists() {
@@ -124,6 +183,7 @@ public class StoreServiceTests {
         assertEquals(expected, captor.getValue());
     }
 
+    //********** updateProduct **********
     @Test
     // test updateProduct
     void itShouldThrowBadRequestWhenProductToUpdateDoesNotExist() {
@@ -148,18 +208,23 @@ public class StoreServiceTests {
 //        assertEquals(expected, exception.getStatus());
     }
 
-    @Test
+//    @Test
     // test updateProduct
-    void itShouldUpdateProductWhenProductToUpdateExists() {
-        // variables
-        Long id = 1L;
-        // setup
-        doNothing().when(service).checkAuthorized(any());
-        when(repository.existsById(id)).thenReturn(false);
+//    void itShouldUpdateProductWhenProductToUpdateExists() {
+//        // variables
+//        UUID token = UUID.randomUUID();
+//        Long id = 1L;
+//        String newName = "new product name";
+//        String message = "Cannot find that product";
+//
+//        // setup
+//        doThrow(new ResponseStatusException(HttpStatus.NOT_FOUND, message)).when(repository.existsById(id));
+//
+//        // assert
+//
+//    }
 
-        // assert
-    }
-
+    //********** deleteProduct **********
     @Test
     // test deleteProduct
     void itShouldThrowBadRequestWhenProductToDeleteDoesNotExist() {
@@ -195,6 +260,4 @@ public class StoreServiceTests {
         assertDoesNotThrow(() -> service.deleteProduct(token, id));
         assertEquals(id, captor.getValue());
     }
-
-
 }

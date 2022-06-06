@@ -48,6 +48,7 @@ public class UserController {
     }
 
     @GetMapping("/isAuthorized")
+    @CrossOrigin
     public void isAuthorized(@RequestParam UUID token) {
         service.isAuthorized(token);
     }
